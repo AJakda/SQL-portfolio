@@ -1,0 +1,15 @@
+--Getting familiar with the data:
+select * from mcu;
+
+--Moving on to find simple stats such as the highest earning movie, costliest one, highest rated.
+select movie_title, worldwide_box_office 
+    from mcu 
+    where worldwide_box_office = (select max(worldwide_box_office) from mcu);
+    
+select movie_title, production_budget
+ from mcu 
+ where production_budget = (select max(production_budget) from mcu);
+ 
+select movie_title, audience_score
+ from mcu 
+ where audience_score = (select max(audience_score) from mcu);
