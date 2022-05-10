@@ -1,7 +1,7 @@
 --Getting familiar with the data:
 select * from mcu;
 
---Moving on to find simple stats such as the highest earning movie, costliest one, highest rated.
+--Moving on to find simple stats such as the highest earning movie, most expensive one, highest rated.
 select movie_title, worldwide_box_office 
     from mcu 
     where worldwide_box_office = (select max(worldwide_box_office) from mcu);
@@ -13,3 +13,31 @@ select movie_title, production_budget
 select movie_title, audience_score
  from mcu 
  where audience_score = (select max(audience_score) from mcu);
+
+--I also wanted to know what to get interesting information on the different phase of the Marvel movies.
+--First I need to know how many movies are in each phase
+select count(*)
+    from mcu 
+    where mcu_phase = 1;
+select count(*)
+    from mcu 
+    where mcu_phase = 2;
+select count(*)
+    from mcu 
+    where mcu_phase = 3;
+select count(*)
+    from mcu 
+    where mcu_phase = 4;
+
+--The highest earning phase, most expensive one, highest rated.
+select mcu_phase, sum(worldwide_box_office)
+    from mcu 
+    group by mcu_phase;
+    
+select mcu_phase, sum(production_budget)
+    from mcu 
+    group by mcu_phase;
+    
+select mcu_phase, max(audience_score)
+    from mcu 
+    group by mcu_phase;
